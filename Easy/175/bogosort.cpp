@@ -7,7 +7,6 @@
 void randomize_string(std::string &str)
 {
     int len = str.length();
-    std::srand(time(NULL));
     for(int x = len; x > 0; x--)
     {
         int position = std::rand()%len;
@@ -17,12 +16,13 @@ void randomize_string(std::string &str)
     }
 }
 
-void bogosort(std::string str, std::string str2, int &counter)
+bool bogosort(std::string str, std::string str2)
 {
     randomize_string(str);
     if(str.compare(str2) != 0){
-        counter++;
-        bogosort(str, str2, counter);
+        return false;
+    } else {
+        return true;
     }
 }
 
@@ -30,9 +30,13 @@ int main(int argc, const char **argv)
 {
     std::string jumbled = argv[1];
     std::string sorted = argv[2];
-    
+    std::srand(time(NULL));
     int counter = 0;
-    bogosort(jumbled, sorted, counter);
+    while(bogosort(jumbled, sorted) != true){
+        std::cout << "Counter at: " << counter << "\n";
+        counter++;
+    }
 
     std::cout << counter << " iterations\n";
+    return 0;
 }

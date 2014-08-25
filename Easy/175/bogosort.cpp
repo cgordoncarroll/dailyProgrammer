@@ -2,13 +2,15 @@
 #include <algorithm>
 #include <string>
 #include <cstdlib>
+#include <ctime>
 
 void randomize_string(std::string &str)
 {
     int len = str.length();
+    std::srand(time(NULL));
     for(int x = len; x > 0; x--)
     {
-        int position = rand()%x;
+        int position = std::rand()%len;
         char tmp = str[x-1];
         str[x-1] = str[position];
         str[position] = tmp;

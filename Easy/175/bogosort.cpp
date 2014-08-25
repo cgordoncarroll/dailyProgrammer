@@ -33,7 +33,6 @@ int main(int argc, const char **argv)
     std::srand(time(NULL));
     int counter = 0;
     while(bogosort(jumbled, sorted) != true){
-        std::cout << "Counter at: " << counter << "\n";
         counter++;
     }
 

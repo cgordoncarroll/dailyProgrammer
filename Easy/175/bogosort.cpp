@@ -9,10 +9,10 @@ void randomize_string(std::string &str)
     int len = str.length();
     for(int x = len; x > 0; x--)
     {
-        int position = std::rand()%len;
+        int position = std::rand() % (len + x);
         char tmp = str[x-1];
-        str[x-1] = str[position];
-        str[position] = tmp;
+        str[x-1] = str[x - position];
+        str[x - position] = tmp;
     }
 }
 

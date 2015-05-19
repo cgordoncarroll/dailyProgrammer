@@ -1,7 +1,6 @@
 extern crate num;
 
 use std::io;
-use std::u64;
 
 fn main() {
     let mut buf = io::stdin();
@@ -33,17 +32,25 @@ fn floyd(start: u64, power: usize) {
     } else {
         let mut done = false;
         println!("Found {}-sad cycle", power.to_string());
+        while !done {
+            tortoise = power_sum(tortoise, power);
+            print!("{}", tortoise.to_string());
+            if tortoise == hare {
+                done = true;
+            } else {
+                print!(",");
+            }
+        }
+        println!("");
     }
-
 }
 
-fn power_sum(x: u64, power: usize) -> u64 {
-    let mut in_val = x.clone();
+fn power_sum(mut x: u64, power: usize) -> u64 {
     let mut sum = 0;
-    while (in_val > 0) {
-        let digit = in_val % 10;
+    while x > 0 {
+        let digit = x % 10;
         sum += num::pow(digit, power);
-        in_val /= 10;
+        x /= 10;
     }
-    return sum;
+    sum
 }
